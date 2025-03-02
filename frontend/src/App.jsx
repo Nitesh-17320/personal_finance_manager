@@ -1,17 +1,22 @@
-import { Container, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
-const App = () => {
+function App() {
+  const [userName, setUserName] = useState("");
+
   return (
-    <>
-      <Navbar />
-      <Container sx={{ mt: 5 }}>
-        <Typography variant="h3" gutterBottom>Welcome to Personal Finance Manager</Typography>
-        <Button variant="contained" component={Link} to="/dashboard">Go to Dashboard</Button>
-      </Container>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login setUserName={setUserName} />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login setUserName={setUserName} />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
